@@ -5,8 +5,8 @@
         <Form>
           <FormItem prop="sex">
             <RadioGroup v-model="form.sex">
-            <Radio :label="1">男</Radio>
-            <Radio :label="2">女</Radio>
+              <Radio :label="1">男</Radio>
+              <Radio :label="2">女</Radio>
             </RadioGroup>
           </FormItem>
           <FormItem prop="nickname">
@@ -25,7 +25,11 @@
             </Input>
           </FormItem>
           <FormItem prop="password">
-            <Input type="password" v-model="form.password" placeholder="Password">
+            <Input
+              type="password"
+              v-model="form.password"
+              placeholder="Password"
+            >
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
@@ -34,9 +38,14 @@
             class="ivu-btn ivu-btn-default ivu-btn-long"
             style="margin-top:10px;"
             to="/login"
-          >登录</router-link>
+          >登录
+          </router-link
+          >
           <div style="margin-top:10px;text-align:right;">
-            <router-link class="ivu-btn ivu-btn-text" to="/">返回首页</router-link>
+            <router-link class="ivu-btn ivu-btn-text" to="/"
+            >返回首页
+            </router-link
+            >
           </div>
         </Form>
       </Card>
@@ -70,5 +79,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="../login/style.scss">
-</style>
+<style lang="scss" scoped src="../login/style.scss"></style>

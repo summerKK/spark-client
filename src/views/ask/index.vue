@@ -13,7 +13,11 @@
           </Select>
         </FormItem>
         <FormItem prop="centent" label="内容">
-          <Input type="textarea" v-model="form.centent" placeholder="请输入内容" />
+          <Input
+            type="textarea"
+            v-model="form.centent"
+            placeholder="请输入内容"
+          />
         </FormItem>
         <Button type="primary" @click="submit">提交</Button>
       </Form>
@@ -34,5 +38,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

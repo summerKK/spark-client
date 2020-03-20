@@ -9,7 +9,11 @@
             </Input>
           </FormItem>
           <FormItem prop="password">
-            <Input type="password" v-model="form.password" placeholder="Password">
+            <Input
+              type="password"
+              v-model="form.password"
+              placeholder="Password"
+            >
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
@@ -18,9 +22,14 @@
             class="ivu-btn ivu-btn-default ivu-btn-long"
             style="margin-top:10px;"
             to="/register"
-          >注册</router-link>
+          >注册
+          </router-link
+          >
           <div style="margin-top:10px;text-align:right;">
-            <router-link class="ivu-btn ivu-btn-text" to="/">返回首页</router-link>
+            <router-link class="ivu-btn ivu-btn-text" to="/"
+            >返回首页
+            </router-link
+            >
           </div>
         </Form>
       </Card>
@@ -47,5 +56,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./style.scss">
-</style>
+<style lang="scss" scoped src="./style.scss"></style>
