@@ -49,8 +49,14 @@ export default {
     };
   },
   methods: {
-    submit() {
-      console.log("调用登录接口");
+    async submit() {
+      let res = await this.$http.post("/api/user/login", this.form);
+      if (res.data.code === 0) {
+        this.$Message.success("登录成功");
+        await this.$router.push("/");
+      } else {
+        this.$Message.error(res.data.msg);
+      }
     }
   }
 };

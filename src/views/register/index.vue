@@ -39,13 +39,11 @@
             style="margin-top:10px;"
             to="/login"
           >登录
-          </router-link
-          >
+          </router-link>
           <div style="margin-top:10px;text-align:right;">
             <router-link class="ivu-btn ivu-btn-text" to="/"
             >返回首页
-            </router-link
-            >
+            </router-link>
           </div>
         </Form>
       </Card>
@@ -70,9 +68,11 @@ export default {
   methods: {
     async submit() {
       let res = await this.$http.post("/api/user/register", this.form);
-      if (res.code === 0) {
+      if (res.data.code === 0) {
         this.$Message.success("注册成功");
-        this.$router.push("/login");
+        await this.$router.push("/login");
+      } else {
+        this.$Message.error(res.data.msg);
       }
     }
   }
