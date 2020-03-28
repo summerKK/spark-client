@@ -7,10 +7,10 @@ const http = axios.create({
 });
 
 http.interceptors.response.use(response => {
-    if (response.data.code === 0) {
+    if (response.data.code === -1) {
       router.push({
         path: "/login",
-        query: {redirect: router.currentRoute.fullPath}  //从哪个页面跳转
+        query: {redirect: router.history.current.name === "login" ? "" : router.currentRoute.fullPath}  //从哪个页面跳转
       })
     }
     return response;

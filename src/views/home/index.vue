@@ -1,22 +1,14 @@
 <template>
   <div class="home">
-    <Tabs value="1">
-      <TabPane label="技术" name="1">
-        <Card v-for="item of list1" :key="item.id" :title="item.title">
+    <Tabs @on-click="tabChange" :value="categoryId">
+      <TabPane
+        v-for="category in categoryList"
+        :label="category.category_name"
+        :key="category.category_id"
+        v-bind:name="'' + category.category_id">
+        <Card v-for="item of list" :key="item.id" :title="item.caption">
           <p>{{ item.content }}</p>
-          <p>提问时间：{{ item.createAt }} 提问者：{{ item.createByName }}</p>
-        </Card>
-      </TabPane>
-      <TabPane label="生活" name="2">
-        <Card v-for="item of list2" :key="item.id" :title="item.title">
-          <p>{{ item.content }}</p>
-          <p>提问时间：{{ item.createAt }} 提问者：{{ item.createByName }}</p>
-        </Card>
-      </TabPane>
-      <TabPane label="八卦" name="3">
-        <Card v-for="item of list3" :key="item.id" :title="item.title">
-          <p>{{ item.content }}</p>
-          <p>提问时间：{{ item.createAt }} 提问者：{{ item.createByName }}</p>
+          <p>提问时间：{{ item.create_time }} 提问者：{{ item.author_name }}</p>
         </Card>
       </TabPane>
     </Tabs>
@@ -24,38 +16,40 @@
 </template>
 
 <script>
-export default {
-  name: "home",
-  data() {
-    return {
-      list1: [
-        {
-          id: 1,
-          title: "aaaa",
-          content: "bbbbbbbbbb",
-          createAt: "2018-10-10",
-          createByName: "rrrrr"
+  export default {
+    name: "home",
+    data() {
+      return {
+        list: [],
+        categoryId: "1",
+        categoryList: [],
+      };
+    },
+    created() {
+      this.getCategoryList();
+      this.getQuestionList();
+    },
+    methods: {
+      async getCategoryList() {
+        let result = await this.$http.get("/api/category/list");
+        if (result.data.code === 0) {
+          this.categoryList = result.data.data;
+        } else {
+          this.$Message.error(result.data.msg);
         }
-      ],
-      list2: [
-        {
-          id: 1,
-          title: "aaaa",
-          content: "bbbbbbbbbb",
-          craeteAt: "2018-10-10",
-          craeteByName: "rrrrr"
+      },
+      async getQuestionList() {
+        let result = await this.$http.get("/api/question/list", {params: {category_id: this.categoryId}});
+        if (result.data.code === 0) {
+          this.list = result.data.data
+        } else {
+          this.$Message.error(result.data.msg);
         }
-      ],
-      list3: [
-        {
-          id: 1,
-          title: "aaaa",
-          content: "bbbbbbbbbb",
-          craeteAt: "2018-10-10",
-          craeteByName: "rrrrr"
-        }
-      ]
-    };
-  }
-};
+      },
+      async tabChange(categoryId) {
+        this.categoryId = categoryId;
+        this.getQuestionList();
+      },
+    },
+  };
 </script>
